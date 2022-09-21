@@ -1,4 +1,5 @@
 const MetaCoin = artifacts.require('MetaCoin')
+const assert = require('assert')
 
 contract('MetaCoin', function (accounts) {
     it('should put 10000 MetaCoin in the first account', function () {
@@ -15,9 +16,9 @@ contract('MetaCoin', function (accounts) {
             })
     })
     it('should call a function that depends on a linked library', function () {
-        var meta
-        var metaCoinBalance
-        var metaCoinEthBalance
+        let meta
+        let metaCoinBalance
+        let metaCoinEthBalance
 
         return MetaCoin.deployed()
             .then(function (instance) {
@@ -40,18 +41,18 @@ contract('MetaCoin', function (accounts) {
             })
     })
     it('should send coin correctly', function () {
-        var meta
+        let meta
 
         // Get initial balances of first and second account.
-        var account_one = accounts[0]
-        var account_two = accounts[1]
+        const account_one = accounts[0]
+        const account_two = accounts[1]
 
-        var account_one_starting_balance
-        var account_two_starting_balance
-        var account_one_ending_balance
-        var account_two_ending_balance
+        let account_one_starting_balance
+        let account_two_starting_balance
+        let account_one_ending_balance
+        let account_two_ending_balance
 
-        var amount = 10
+        const amount = 10
 
         return MetaCoin.deployed()
             .then(function (instance) {

@@ -11,6 +11,8 @@
         "test": "test"
     },
     "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint": "^8.23.1",
         "husky": "^8.0.1",
         "lint-staged": "^13.0.3",
         "mocha": "^9.2.2",
@@ -32,6 +34,7 @@
     },
     "homepage": "https://github.com/taavikybar/web3#readme",
     "lint-staged": {
-        "*.{js,css,md}": "prettier --write"
+        "*.{js,css,md}": "prettier --write",
+        "*.js": "eslint"
     }
 }
