@@ -3,6 +3,7 @@ module.exports = {
     extends: 'eslint:recommended',
     parserOptions: {
         ecmaVersion: 'latest',
+        // project: ['./tsconfig.json'],
     },
     env: {
         es2022: true,
@@ -12,20 +13,10 @@ module.exports = {
         jest: true,
     },
     // parser: "babel-eslint",
-    // "parser": "@typescript-eslint/parser",
-    // "parserOptions": { "project": ["./tsconfig.json"] },
-    // "plugins": [
-    //     "@typescript-eslint"
-    // ],
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
     rules: {
         'no-var': 'error',
-        // "@typescript-eslint/strict-boolean-expressions": [
-        //     2,
-        //     {
-        //         "allowString" : false,
-        //         "allowNumber" : false
-        //     }
-        // ]
     },
     ignorePatterns: [],
     globals: {
