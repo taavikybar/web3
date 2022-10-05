@@ -1,11 +1,20 @@
 import Web3 from 'web3'
 
-export const testWeb3 = () => {
-    const web3 = new Web3(Web3.givenProvider || 'ws://localhost:8545')
-    const from = '0xDAFEA492D9c6733ae3d56b7Ed1ADB60692c98Bc5'
+export const testWeb3 = (apiKey?: string, fromAddress?: string) => {
+    if (!apiKey) {
+        console.log('INFURA API KEY is not defined')
+        return false
+    }
+
+    const provider = `https://mainnet.infura.io/v3/${apiKey}`
+    const web3 = new Web3(provider)
+
+    web3.eth.getBlockNumber().then((result) => {
+        console.log('Latest Ethereum Block is ', result)
+    })
 
     web3.eth
-        .sendTransaction({ from, data: '' })
+        .sendTransaction({ from: fromAddress, data: '' })
         .once('sending', function (payload) {
             console.log('sending', payload)
         })
