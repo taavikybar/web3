@@ -28,15 +28,11 @@ export default () => {
     }
 
     ethereum.on('accountsChanged', (accounts: string[]): void => {
-        console.log('accountsChanged')
         if (accounts.length === 0) setAccount('')
         else setAccount(accounts[0])
     })
 
-    ethereum.on('chainChanged', (chainId: string) => {
-        console.log('chainChanged', chainId)
-        window.location.reload()
-    })
+    ethereum.on('chainChanged', () => window.location.reload())
 
     const onGetPermissions = async () => {
         try {

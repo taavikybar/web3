@@ -3,8 +3,6 @@ import { AddEthereumChainParameter } from '@raydeck/metamask-ts'
 export const switchChain = async (network: AddEthereumChainParameter) => {
     const { ethereum } = window
 
-    console.log('switchChain')
-
     try {
         await ethereum.request({
             method: 'wallet_switchEthereumChain',
@@ -15,7 +13,7 @@ export const switchChain = async (network: AddEthereumChainParameter) => {
             try {
                 await ethereum.request({
                     method: 'wallet_addEthereumChain',
-                    params: network,
+                    params: [network],
                 })
             } catch (addError) {
                 // handle "add" error

@@ -26,9 +26,10 @@ export const NETWORKS: { [key: string]: AddEthereumChainParameter } = {
         chainName: 'BSC Smart Chain',
         rpcUrls: ['https://bsc-dataseed.binance.org/'],
         nativeCurrency: {
-            name: 'BNB',
+            name: 'Binance Coin',
             symbol: 'BNB',
             decimals: 18,
         },
+        blockExplorerUrls: ['https://bscscan.com'],
     },
 }
