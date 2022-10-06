@@ -76,10 +76,6 @@
         "url": "https://github.com/taavikybar/web3/issues"
     },
     "homepage": "https://github.com/taavikybar/web3#readme",
-    "lint-staged": {
-        "*.{js,ts,css,md}": "prettier --write",
-        "*.{js,ts}": "eslint"
-    },
     "pre-commit": [
         "lint",
         "test"
