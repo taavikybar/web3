@@ -10,6 +10,7 @@ import './ConvertLib.sol';
 
 contract MetaCoin {
     mapping(address => uint256) balances;
+    uint256 test = 123;
 
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
 
@@ -34,5 +35,9 @@ contract MetaCoin {
 
     function getBalance(address addr) public view returns (uint256) {
         return balances[addr];
+    }
+
+    function getSome() public view returns (uint256) {
+        return test;
     }
 }

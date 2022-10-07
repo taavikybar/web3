@@ -1,76 +1,46 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { switchChain } from '../utils/metamask'
-import { NETWORKS } from '../constants'
+import Web3 from 'web3'
+import { AbiItem } from 'web3-utils'
+import { Wallet } from './wallet'
+import metaCoinAbi from '../../build/abi/MetaCoin.json'
+import convertLibAbi from '../../build/abi/ConvertLib.json'
+
+const metaCoinAddress = '0x03BCce64A27d64B2d1bFD9FE6e2164fc3Abd0057'
+const convertLibAddress = '0x2De112030a939DaA04e5030CDA195337eC6C2E34'
+// const apiKey = '68f896a78c8749b4adc3e7e61a0ef05c'
+// const provider = `https://mainnet.infura.io/v3/${apiKey}`
+const provider = 'ws://localhost:7545'
+const address = '0xb28d290EC228EDfe48Ab61AeAcE78285B802a774'
 
 export default () => {
-    const { ethereum } = window
-
-    if (typeof ethereum === 'undefined') {
-        return <>Please install metamask</>
-    }
-
-    const [account, setAccount] = useState('')
-    const [chainId, setChainId] = useState('')
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        setAccount(ethereum.selectedAddress)
-        setChainId(ethereum.chainId)
-    }, [])
-
-    const onConnect = async () => {
-        // should be in try/catch
-        const accounts = await ethereum.request({
-            method: 'eth_requestAccounts',
-        })
-        setAccount(accounts[0])
-    }
-
-    ethereum.on('accountsChanged', (accounts: string[]): void => {
-        if (accounts.length === 0) setAccount('')
-        else setAccount(accounts[0])
-    })
-
-    ethereum.on('chainChanged', () => window.location.reload())
-
-    const onGetPermissions = async () => {
-        try {
-            const permissions = await ethereum.request({
-                method: 'wallet_requestPermissions',
-                params: [{ eth_accounts: {} }],
-            })
-            console.log(permissions)
-        } catch (err: any) {
-            if (err.code === 4001) {
-                setError('permissions must be provided')
-            } else {
-                setError('an error occurred')
-                console.log(err)
-            }
+    const web3 = new Web3(provider)
+    const metaCoinContract = new web3.eth.Contract(
+        metaCoinAbi as AbiItem[],
+        metaCoinAddress,
+        {
+            from: address,
         }
+    )
+
+    const convertLibContract = new web3.eth.Contract(
+        convertLibAbi as AbiItem[],
+        convertLibAddress,
+        {
+            from: address,
+        }
+    )
+
+    const onClick = async () => {
+        const balance = await metaCoinContract.methods.getSome().call()
+        const conversion = await convertLibContract.methods.convert(2, 3).call()
+
+        console.log(balance, conversion)
     }
 
     return (
         <>
-            <p>Chain ID {chainId}</p>
-            <button onClick={onConnect}>
-                {!account && 'Connect'}
-                {account && `Connected: ${account}`}
-            </button>
-            <br />
-            <button onClick={onGetPermissions}>get permissions</button>
-            {error}
-            <br />
-            <button onClick={async () => await switchChain(NETWORKS.ropstein)}>
-                switch to ropstein
-            </button>
-            <button onClick={() => switchChain(NETWORKS.mainnet)}>
-                switch to mainnet
-            </button>
-            <button onClick={() => switchChain(NETWORKS.bsc)}>
-                switch to bsc
-            </button>
+            <button onClick={onClick}>Load</button>
+            <Wallet />
         </>
     )
 }

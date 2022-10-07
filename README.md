@@ -1,15 +1,40 @@
-# web3
+# web3 playground project
 
-## Deployment
+Install dependecies:
 
-deploy to rinkeby testnet:
+`npm i`
 
-`truffle migrate --network rinkeby`
+## Front end app
 
-deploy to mainnet:
+Start webpack hot reload build:
 
-`truffle migrate --network mainnet`
+`npm run hot`
+
+In a separate terminal window, start assets server:
+
+`npm run server`
+
+Go to [http://localhost:8080/](http://localhost:8080/)
+
+## Ethereum smart contracts
+
+### Testing
+
+Run truffle tests:
+
+`npm test`
+
+### Deployment
+
+- start a ganache instance, either ui or cli version
+- update `truffle-config.js` with the correct port if needed
+
+To deploy contracts (`ruffle migrate`) and generate ABI files:
+
+`npm run deploy` 
+
 
 ## Questions
 
 -   how to get first/second address from ganache? or start with a seed?
+

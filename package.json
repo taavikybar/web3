@@ -55,7 +55,7 @@
         "webpack-dev-server": "^4.10.0"
     },
     "scripts": {
-        "test": "truffle test",
+        "test": "truffle test --config truffle-config.test.js",
         "hot": "webpack-dev-server",
         "prod": "webpack --config webpack.config.prod.js",
         "server": "http-server",
@@ -63,7 +63,9 @@
         "lint": "npm run eslint && npm run sasslint",
         "eslint": "eslint ./lib/**/*.{js,ts,tsx}",
         "sasslint": "sass-lint --config .sasslintrc --no-exit --verbose",
-        "ganache": "ganache --wallet.deterministic true"
+        "ganache": "ganache --wallet.deterministic true",
+        "abi": "node ./scripts/abi.js",
+        "deploy": "truffle deploy && npm run abi"
     },
     "repository": {
         "type": "git",
