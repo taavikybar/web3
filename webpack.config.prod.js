@@ -1,7 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     mode: 'production',
@@ -33,27 +32,14 @@ module.exports = {
                     },
                 },
             },
-            // {
-            // 	test: /\.(png|jpg|jpeg|gif|svg)$/,
-            // 	use: {
-            // 		loader: 'url-loader',
-            // 		options: {
-            // 			limit: 100000, // 100kb
-            // 			name: '[name].[ext]',
-            // 			outputPath: 'img',
-            // 		},
-            // 	},
-            // },
         ],
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     output: {
-        // filename: 'bundle.prod.js',
-        // filename: 'bundle.prod-[chunkhash].js',
         filename: '[name].[chunkhash].js',
-        path: path.join(__dirname, '/build'),
+        path: path.join(__dirname, '/fe-build'),
     },
     optimization: {
         runtimeChunk: 'single',
@@ -73,10 +59,6 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: 'index.template.html',
-            favicon: './lib/img/favicon.png',
-        }),
-        new CopyWebpackPlugin({
-            patterns: [{ from: 'lib/img/fb-og.jpg', to: 'fb-og.jpg' }],
         }),
     ],
 }

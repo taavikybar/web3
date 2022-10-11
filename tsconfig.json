@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
+    "module": "esnext",
     "strict": true,
     "jsx": "react",
     "moduleResolution": "node",
@@ -8,9 +9,10 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    // "types": ["@types/node", "@types/chai", "@types/mocha"],
+    // "typeRoots": ["./node_modules/@types", "./types"],
   },
   "include": [
     "lib/types/types.d.ts",

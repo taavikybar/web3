@@ -62,10 +62,8 @@ module.exports = () => {
             // https: true,
             headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods':
-                    'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-                'Access-Control-Allow-Headers':
-                    'X-Requested-With, content-type, Authorization',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
             },
         },
         resolve: {
@@ -73,11 +71,8 @@ module.exports = () => {
         },
         output: {
             filename: 'bundle.dev.js',
-            path: path.join(__dirname, '/build'),
+            path: path.join(__dirname, '/fe-build'),
         },
-        plugins: [
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.DefinePlugin(envKeys),
-        ],
+        plugins: [new webpack.HotModuleReplacementPlugin(), new webpack.DefinePlugin(envKeys)],
     }
 }
